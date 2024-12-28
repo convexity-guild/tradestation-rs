@@ -1,6 +1,6 @@
 //! # Tradestation Rust Client
 //!
-//! Fully featured and ergonomic rust client for the TradeStation API.
+//! High level, fully featured, and ergonomic rust client for the TradeStation API.
 //!
 //! ## Features
 //!
@@ -12,12 +12,12 @@
 //!
 //! Use Cargo CLI:
 //! ```bash
-//! cargo install tradestation
+//! cargo install tradestation-rs
 //! ```
 //! Or manually add it into your `Cargo.toml`:
 //! ```toml
 //! [dependencies]
-//! tradestation = "0.0.4"
+//! tradestation = "0.1.2"
 //! ```
 //!
 //! ## Usage
@@ -25,7 +25,7 @@
 //! Simple example for streaming 4 hour aggregated
 //! bars of trading activity for Crude Oil Futures:
 //! ```ignore
-//! use tradestation::{
+//! use tradestation_rs::{
 //!     responses::MarketData::StreamBarsResp,
 //!     ClientBuilder, Error,
 //!     MarketData::{self, BarUnit},

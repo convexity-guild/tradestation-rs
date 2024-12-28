@@ -1,11 +1,11 @@
 [package]
-name = "tradestation"
-version = "0.0.4"
-authors = ["Antonio Hickey <contact@antoniohickey.com>"]
-description = "An ergonomic Rust client for the TradeStation API."
-documentation = "https://docs.rs/tradestation/latest/tradestation/index.html"
-homepage = "https://crates.io/crates/tradestation"
-repository = "https://github.com/antonio-hickey/tradestation-rs"
+name = "tradestation-rs"
+version = "0.1.2"
+authors = ["Convexity Guild <contact@convexityguild.com>", "Antonio Hickey <contact@antoniohickey.com>"]
+description = "High level, fully featured, and ergonomic Rust client for the TradeStation API."
+documentation = "https://docs.rs/tradestation-rs/latest/tradestation-rs/index.html"
+homepage = "https://crates.io/crates/tradestation-rs"
+repository = "https://github.com/convexity-guild/tradestation-rs"
 readme = "README.md"
 keywords = ["tradestation", "finance", "quant", "trading"]
 license = "MIT"
@@ -14,7 +14,7 @@ include = ["README.md", "src/**/*", "examples/**/*"]
 edition = "2021"
 
 [lib]
-name = "tradestation"
+name = "tradestation_rs"
 path = "src/lib.rs"
 
 [dependencies]
