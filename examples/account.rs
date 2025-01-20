@@ -1,7 +1,7 @@
 // Example file on basic usage for account endoints
 
 use tradestation::{
-    account::{MultipleAccounts, Position, PositionType},
+    account::{MultipleAccounts, OrderStatus, Position, PositionType},
     responses::account::{StreamOrdersResp, StreamPositionsResp},
     ClientBuilder, Error,
 };
@@ -59,6 +59,10 @@ async fn main() -> Result<(), Error> {
                     StreamOrdersResp::Order(order) => {
                         // Response for an `Order` streamed in
                         println!("{order:?}");
+
+                        if order.status == OrderStatus::FLL {
+                            println!("xxx");
+                        }
 
                         // keep a live sum of all the funds allocated to open orders
                         let order_value = order.price_used_for_buying_power.parse::<f64>();

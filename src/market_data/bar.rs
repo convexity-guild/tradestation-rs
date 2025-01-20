@@ -230,7 +230,7 @@ pub struct GetBarsQuery {
     /// or `BarUnit::Monthly` unit.
     ///
     /// NOTE: This parameter is mutually exclusive with the `first_date` parameter.
-    pub bars_back: i16,
+    pub bars_back: u32,
     /// The first date formatted as `"YYYY-MM-DD"`, or `"2020-04-20T18:00:00Z"`.
     ///
     /// NOTE: This parameter is mutually exclusive with the `bars_back` parameter.
@@ -301,7 +301,7 @@ pub struct StreamBarsQuery {
     /// or `BarUnit::Monthly` unit.
     ///
     /// NOTE: This parameter is mutually exclusive with the `first_date` parameter.
-    pub bars_back: i16,
+    pub bars_back: u32,
     /// The United States (US) stock market session template.
     ///
     /// NOTE: Ignored for non U.S equity symbols.
@@ -387,7 +387,7 @@ pub struct GetBarsQueryBuilder {
     /// or `BarUnit::Monthly` unit.
     ///
     /// NOTE: This parameter is mutually exclusive with the `first_date` parameter.
-    bars_back: Option<i16>,
+    bars_back: Option<u32>,
     /// The first date formatted as `"YYYY-MM-DD"`, or `"2020-04-20T18:00:00Z"`.
     ///
     /// NOTE: This parameter is mutually exclusive with the `bars_back` parameter.
@@ -458,8 +458,18 @@ impl GetBarsQueryBuilder {
     /// or `BarUnit::Monthly` unit.
     ///
     /// NOTE: This parameter is mutually exclusive with the `first_date` parameter.
-    pub fn bars_back(mut self, bars_back: i16) -> Self {
+    pub fn bars_back(mut self, bars_back: u32) -> Self {
         self.bars_back = Some(bars_back);
+        self
+    }
+
+    /// Fetch the maximum (57,600) bars back to fetch.
+    ///
+    /// NOTE: This parameter is mutually exclusive with the `first_date` and `bars_back`
+    /// parameters. If using this method `max_bars_back` then you should not use either
+    /// `first_date` or `bars_back` methods as they can overwrite this parameter.
+    pub fn max_bars_back(mut self) -> Self {
+        self.bars_back = Some(57_600);
         self
     }
 
@@ -541,7 +551,7 @@ pub struct StreamBarsQueryBuilder {
     /// or `BarUnit::Monthly` unit.
     ///
     /// NOTE: This parameter is mutually exclusive with the `first_date` parameter.
-    bars_back: Option<i16>,
+    bars_back: Option<u32>,
     /// The United States (US) stock market session template.
     ///
     /// NOTE: Ignored for non U.S equity symbols.
@@ -593,9 +603,21 @@ impl StreamBarsQueryBuilder {
     /// is 57,600. There is no limit on `BarUnit::Daily`, `BarUnit::Weekly`,
     /// or `BarUnit::Monthly` unit.
     ///
-    /// NOTE: This parameter is mutually exclusive with the `first_date` parameter.
-    pub fn bars_back(mut self, bars_back: i16) -> Self {
+    /// NOTE: This parameter is mutually exclusive with the `max_bars_back` parameter.
+    /// If using this method `bars_back` then you should not use the `max_bars_back`
+    /// method as it can overwrite this parameter.
+    pub fn bars_back(mut self, bars_back: u32) -> Self {
         self.bars_back = Some(bars_back);
+        self
+    }
+
+    /// Fetch the maximum (57,600) bars back to fetch with the stream.
+    ///
+    /// NOTE: This parameter is mutually exclusive with the `bars_back` parameter.
+    /// If using this method `max_bars_back` then you should not use the `bars_back`
+    /// method as it can overwrite this parameter.
+    pub fn max_bars_back(mut self) -> Self {
+        self.bars_back = Some(57_600);
         self
     }
 
